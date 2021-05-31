@@ -54,14 +54,14 @@ function rellenarToDatosProductos(productos) {
     fila.appendChild(elemento);
     elemento = document.createElement("td");
     elemento.innerHTML =
-      `<button class="btn btn-link" onclick="editaProducto(${producto.id})"><i class="bi-pencil"></i></button>` +
-      `<button style="color:red;" class="btn btn-link"  onclick="borrarProducto(${producto.id})"><i class="bi-x-circle"></i></button>`;
+      `<button style="color:gray;"class="btn btn-link" onclick="editaProducto(${producto.id})"><i class="bi-pencil"></i></button>` +
+      `<button style="color:red;" class="btn btn-link"  onclick="borrarProducto(${producto.id})"><i class="bi-x-circle"></i></button>`+
+      `<button style="color:purple; "class="btn btn-link" onclick="mostrarProducto(${producto.id})"><i class="bi bi-eye"></i></button>`;
+      
       fila.appendChild(elemento);
 
     elemento = document.createElement("td");
-    elemento.innerHTML = 
-      `<button style="color:green; "class="btn btn-link" onclick="mostrarProducto(${producto.id})"><i class="bi bi-grid-fill"></i></button>`;
-      fila.appendChild(elemento);
+    
 
     tblBody.appendChild(fila);
   }

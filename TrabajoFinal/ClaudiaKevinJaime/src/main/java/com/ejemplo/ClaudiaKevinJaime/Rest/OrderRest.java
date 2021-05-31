@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import com.ejemplo.ClaudiaKevinJaime.Entities.Order;
 import com.ejemplo.ClaudiaKevinJaime.Models.OrderModel;
 
-@Path("pedido")
+@Path("pedidos")
 public class OrderRest {
 	static OrderModel Orders;
 
