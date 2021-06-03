@@ -1,5 +1,4 @@
 package com.ejemplo.ClaudiaKevinJaime.Rest;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,9 +20,7 @@ import com.ejemplo.ClaudiaKevinJaime.Models.CustomersModel;
 @Path("clientes")
 public class CustomerRest {
     static CustomersModel customers;
-
     public CustomerRest() {
-
 	try {
 	    customers = new CustomersModel();
 	} catch (SQLException e) {

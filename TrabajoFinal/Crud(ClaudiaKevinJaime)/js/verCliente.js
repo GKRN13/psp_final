@@ -6,27 +6,16 @@ function init() {
     const queryStr = window.location.search.substring(1);
     const parametro = queryStr.split("=");
     idcliente = parametro[1];
-
     rellenaCliente(idcliente);
   } else {
     document.getElementById("idId").value = "Nuevo Cliente";
-    document.getElementById("idSalvar").disabled = false;
   }
-
-  // Usa el boton de cancelar para volver atrás
-  document.getElementById("idCancel").addEventListener("click", (evt) => {
-    evt.preventDefault();
-    volver();
-  });
-
   // El boton de salvar sólo está activo cuando se carge los datos de un cliente
   // document.getElementById("idSalvar").addEventListener("click", salvarCliente);
-  document.getElementById("idFormCliente").addEventListener("submit", salvarCliente);
+  document.getElementById("idFormCliente").addEventListener;
 }
-
 function rellenaCliente(idcliente) {
   const peticionHTTP = fetch(URL + "/" + idcliente);
-
   peticionHTTP
     .then((respuesta) => {
       if (respuesta.ok) {
@@ -38,9 +27,7 @@ function rellenaCliente(idcliente) {
       for (let input of inputs) {
         input.value = cliente[input.name] ?? "";
       }
-      document.getElementById("idSalvar").disabled = false;
-
-      console.log(cliente.lista);
+    console.log(cliente.lista);
       let tblBody = document.getElementById("id_tblPedidos");
       for (const pedido of cliente.lista) {
         let fila = document.createElement("tr");
@@ -49,7 +36,7 @@ function rellenaCliente(idcliente) {
         elemento.innerHTML = pedido.id;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
-        elemento.innerHTML = pedido.ship_name;
+        elemento.innerHTML = pedido.customer_id;
         fila.appendChild(elemento);
         elemento = document.createElement("td");
         elemento.innerHTML = pedido.shipping_fee;
@@ -72,65 +59,19 @@ function rellenaCliente(idcliente) {
         elemento = document.createElement("td");
         elemento.innerHTML = pedido.status_id ?? "";
         fila.appendChild(elemento);
-        elemento = document.createElement("td");
-        elemento.innerHTML =
-          `<button style="color:gray;"class="btn btn-link" onclick="editaPedido(${pedido.id})"><i class="bi-pencil"></i></button>` +
-          `<button style="color:red;" class="btn btn-link"  onclick="borrarPedido(${pedido.id})"><i class="bi-x-circle"></i></button>`+
-          `<button style="color:black; "class="btn btn-link" onclick="mostrarPedidos(${pedido.id})"><i class="bi bi-eye"></i></button>`;
-          fila.appendChild(elemento);
-        elemento = document.createElement("td");
         tblBody.appendChild(fila);
       }
-    })
-    .catch((error) => {
-      muestraMsg( "No he podido recupera este  Cliente. " + error, false);
     });
 }
-
 function salvarCliente(evt) {
   evt.preventDefault();
-
   // Creo un array con todo los datos formulario
   let cliente = {};
-
   // Relleno un array cliente con todos los campos del formulario
   let inputs = document.getElementsByTagName("input");
   for (let input of inputs) {
     cliente[input.name] = input.value;
   }
-
-  if (cliente.id == "Nuevo Cliente") { // Añadimos cliente
-    delete cliente.id;
-    opciones = {
-      method: "POST", // Añadimos un registro a la BBDD
-      body: JSON.stringify(cliente), // Paso el array cliente a un objeto que luego puedo jsonear
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  } else {  // Modificamos
-    opciones = {
-      method: "PUT", // Modificamos la BBDD
-      body: JSON.stringify(cliente), // Paso el array cliente a un objeto que luego puedo jsonear
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-  }
-
-  fetch(URL, opciones)
-    .then((respuesta) => {
-      if (respuesta.ok) {
-        return respuesta.json();
-      } else throw new Error("Fallo al actualizar: " + respuesta);
-    })
-    .then((respuesta) => {
-      muestraMsg("Datos Actualizados💁‍♀️", "✨ Todo parace haber ido bien ✨", false, "success");
-    })
-    .catch((error) => {
-      muestraMsg("Que mal... f👎 ", "🥺No he podido actulizar la Base de Datos😭 " + error, false, "error");
-    });
-
   return false;
 }
 function volver() {
@@ -167,7 +108,6 @@ function muestraMsg(titulo, mensaje, okButton, tipoMsg, okMsg = "OK", closeMsg =
 
   myModal.show();
 }
-
 function mostrarClientes(){
   window.location.href = "indexCliente.html";
 }

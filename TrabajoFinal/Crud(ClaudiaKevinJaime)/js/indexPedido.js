@@ -58,15 +58,11 @@ function rellenarToDatosPedidos(pedidos) {
     fila.appendChild(elemento);
     elemento = document.createElement("td");
     elemento.innerHTML =
-      `<button class="btn btn-link" onclick="editaPedido(${pedido.id})"><i class="bi-pencil"></i></button>` +
-      `<button style="color:red;" class="btn btn-link"  onclick="borrarPedido(${pedido.id})"><i class="bi-x-circle"></i></button>`;
+      `<button style="color:gray;"class="btn btn-link" onclick="editaPedido(${pedido.id})"><i class="bi-pencil"></i></button>` +
+      `<button style="color:red;" class="btn btn-link"  onclick="borrarPedido(${pedido.id})"><i class="bi-x-circle"></i></button>`+
+      `<button style="color:black; "class="btn btn-link" onclick="mostrarPedidos(${pedido.id})"><i class="bi bi-eye"></i></button>`;
       fila.appendChild(elemento);
-
     elemento = document.createElement("td");
-    elemento.innerHTML = 
-      `<button style="color:green; "class="btn btn-link" onclick="mostrarPedidos(${pedido.id})"><i class="bi bi-grid-fill"></i></button>`;
-      fila.appendChild(elemento);
-
     tblBody.appendChild(fila);
   }
 
@@ -88,7 +84,7 @@ function buscarPedido(e) {
     rellenarDatosPedido(order);
   })
   .catch((error) => {
-    muestraMsg("¡Me cachís!", "¡Qué haces buscando un pedido que no existe!<br>" + error, false, "error");
+    muestraMsg("¡Qué haces buscando un pedido que no existe!<br>" + error, false, "error");
   });
 }
 
@@ -135,15 +131,11 @@ function rellenarDatosPedido(order){
 
   elemento = document.createElement("td");
     elemento.innerHTML =
-      `<button class="btn btn-link" onclick="editaPedido(${order.id})"><i class="bi-pencil"></i></button>` +
-      `<button style="color:red;" class="btn btn-link"  onclick="borrarPedido(${order.id})"><i class="bi-x-circle"></i></button>`;
+      `<button style="color:gray;"class="btn btn-link" onclick="editaPedido(${order.id})"><i class="bi-pencil"></i></button>` +
+      `<button style="color:red;" class="btn btn-link"  onclick="borrarPedido(${order.id})"><i class="bi-x-circle"></i></button>`+
+      `<button style="color:black; "class="btn btn-link" onclick="mostrarPedidos(${order.id} )"><i class="bi bi-grid-fill"></i></button>`;
       fila.appendChild(elemento);
-
     elemento = document.createElement("td");
-    elemento.innerHTML = 
-      `<button style="color:green; "class="btn btn-link" onclick="mostrarPedidos(${order.id} )"><i class="bi bi-grid-fill"></i></button>`;
-      fila.appendChild(elemento);
-  
   tblBody.appendChild(fila);
 }
 
@@ -171,10 +163,10 @@ function borrarPedido(idpedido) {
 }
 
 function mostrarPedidos(idPedido) {
-  window.location.href = "indexPedido.html?idPedido="+idPedido;
+  window.location.href = "verPedido.html?idPedido="+idPedido;
 }
 
-function mostrarPedidos() {
+function mostrarProductos() {
   window.location.href = "indexPedido.html";
 }
 
