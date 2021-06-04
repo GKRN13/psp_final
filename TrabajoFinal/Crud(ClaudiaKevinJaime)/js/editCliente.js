@@ -86,6 +86,72 @@ function rellenaCliente(idcliente) {
       muestraMsg( "No he podido recupera este  Cliente. " + error, false);
     });
 }
+function editaPedido(idpedido) {
+  window.location.href = `editarPedido.html?idpedido=${idpedido}`;
+}
+
+function addPedido() {
+  window.location.href = "nuevoPedido.html";
+}
+
+function borrarPedido(idpedido) {
+  muestraMsg(
+    "¡Ehh...🖐!",
+    `¿🤕Estas seguró de querer borrar  el pedido ${idpedido}?`,
+    true,
+    "question",
+    "Claro!👌",
+    "No 🤡"
+  );
+  document.getElementById("idMdlOK").addEventListener("click", () => {
+    
+    borrarpedidoAPI(idpedido);
+  });
+}
+
+function mostrarPedidos(idPedido) {
+  window.location.href = "verPedido.html?idPedido="+idPedido;
+}
+
+function mostrarProductos() {
+  window.location.href = "indexPedido.html";
+}
+function borrarPedidoAPI(idpedido) {
+  myModal.hide();
+  modalWait.show();
+  opciones = {
+    method: "DELETE", // Modificamos la BBDD
+  };
+
+  fetch(URL + "/" + idpedido, opciones)
+    .then((respuesta) => {
+      if (respuesta.ok) {
+        return respuesta.json();
+      } else 
+      {
+        throw new Error(`Fallo al borrar, el servidor responde con ${respuesta.status}-${respuesta.statusText}`);
+      }
+        
+    })
+    .then((respuesta) => {
+      modalWait.hide();
+      muestraMsg(`¡Pedido ${idpedido} Borrado!`, "¡A tomar por saco!", false, "success");
+      document.getElementById('idMdlClose').addEventListener("click", () => {
+        location.reload();
+        document.getElementById('idMdlClose').removeEventListener("click");
+      })
+      
+    })
+    .catch((error) => {
+      modalWait.hide();
+      muestraMsg(
+        "Pedido NO borrado",
+        "¿Es posible que este pedido tenga algún cliente? 🤔<br>" + error,
+        false,
+        "error"
+      );
+    });
+}
 
 function salvarCliente(evt) {
   evt.preventDefault();

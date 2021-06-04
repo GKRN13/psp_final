@@ -66,18 +66,41 @@ function rellenaPedido(idpedido) {
         elemento.innerHTML =
           `<button style="color:gray;"class="btn btn-link" onclick="editaProducto(${producto.id})"><i class="bi-pencil"></i></button>` +
           `<button style="color:red;" class="btn btn-link"  onclick="borrarProducto(${producto.id})"><i class="bi-x-circle"></i></button>`+
-          `<button style="color:black;  "class="btn btn-link" onclick="mostrarProducto(${producto.id})"><i class="bi bi-eye"></i></button>`;
+          `<button style="color:black;  "class="btn btn-link" onclick="mostrarProductos(${producto.id})"><i class="bi bi-eye"></i></button>`;
           fila.appendChild(elemento);
+          
         tblBody.appendChild(fila);
       }
-      function editaProducto(idproducto) {
-        window.location.href = `editarProducto.html?idproducto=${idproducto}`;
-      }
+     
     })
     .catch((error) => {
-      muestraMsg("No he podido recupera este  Pedido. " + error, false);
+      muestraMsg("No he podido recupera este  Producto. " + error, false);
     });
 }
+function editaProducto(idproducto) {
+  window.location.href = `editarProducto.html?idproducto=${idproducto}`;
+}
+function borrarProducto(idproducto) {
+  muestraMsg(
+    "¡Ehh...🖐!",
+    `¿🤕Estas seguró de querer borrar  el producto ${idproducto}?`,
+    true,
+    "question",
+    "Claro!👌",
+    "No 🤡"
+  );
+  document.getElementById("idMdlOK").addEventListener("click", () => {
+    
+    borrarClienteAPI(idproducto);
+  });
+}
+function mostrarProductos(idProducto) {
+  window.location.href = "indexProducto.html?idProducto="+idProducto;
+}
+function mostrarProductos() {
+  window.location.href = "indexProducto.html";
+}
+
 
 function salvarPedido(evt) {
   evt.preventDefault();
