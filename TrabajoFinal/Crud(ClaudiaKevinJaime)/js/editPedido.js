@@ -62,12 +62,20 @@ function rellenaPedido(idpedido) {
         elemento = document.createElement("td");
         elemento.innerHTML = producto.discount ?? "";
         fila.appendChild(elemento);
-  
+        elemento = document.createElement("td");
+        elemento.innerHTML =
+          `<button style="color:gray;"class="btn btn-link" onclick="editaProducto(${producto.id})"><i class="bi-pencil"></i></button>` +
+          `<button style="color:red;" class="btn btn-link"  onclick="borrarProducto(${producto.id})"><i class="bi-x-circle"></i></button>`+
+          `<button style="color:black;  "class="btn btn-link" onclick="mostrarProducto(${producto.id})"><i class="bi bi-eye"></i></button>`;
+          fila.appendChild(elemento);
         tblBody.appendChild(fila);
+      }
+      function editaProducto(idproducto) {
+        window.location.href = `editarProducto.html?idproducto=${idproducto}`;
       }
     })
     .catch((error) => {
-      muestraMsg("¡Me cachís!", "No he podido recupera este  Pedido. " + error, false);
+      muestraMsg("No he podido recupera este  Pedido. " + error, false);
     });
 }
 
